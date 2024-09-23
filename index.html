@@ -32,6 +32,15 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+        .tab {
+            display: none;
+        }
+        .tab-content {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
         footer {
             text-align: center;
             padding: 10px;
@@ -42,6 +51,21 @@
             width: 100%;
         }
     </style>
+    <script>
+        function showTab(tabName) {
+            var i, tabContent, tabs;
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            tabs = document.getElementsByClassName("tab");
+            for (i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add("active");
+        }
+    </script>
 </head>
 <body>
 
@@ -57,19 +81,26 @@
 
 <section id="home">
     <h2>主页</h2>
-    <p>欢迎来到我的生活旅程网页！这里记录我的想法和文章。</p>
+    <div>
+        <button class="tab active" data-tab="intro" onclick="showTab('intro')">介绍</button>
+        <button class="tab" data-tab="thoughts" onclick="showTab('thoughts')">想法</button>
+    </div>
+    <div id="intro" class="tab-content active">
+        <p>欢迎来到我的生活旅程网页！这里记录我的想法和文章。</p>
+    </div>
+    <div id="thoughts" class="tab-content">
+        <p>这是一个关于我思考和反思的地方，我将分享我的内心感受和见解。</p>
+    </div>
 </section>
 
 <section id="reading">
     <h2>读书记录</h2>
     <p>在这里记录我读过的书籍和我的想法。</p>
-    <!-- 可以添加更多内容 -->
 </section>
 
 <section id="movies">
     <h2>观影记录</h2>
     <p>在这里记录我观看过的电影和我的评价。</p>
-    <!-- 可以添加更多内容 -->
 </section>
 
 <footer>
